@@ -50,7 +50,7 @@ This extension provides following features using MAS Tools API:
 
 This will complete the setup and message in right hand corner you will see message for configuration is saved.
 
-![alt text](image-setup.png)
+![alt text](images/image-setup.png)
 
 ### Start Manage
 
@@ -60,8 +60,8 @@ You'll see a poup with MAXINST and Manage URL to confirm you are going to run co
 
 ![alt text](images/image-change.png)
 
->> Click "Continue" if you want to proceed further.
->> If Environment is not correct then click on "Change Environment" button and resetup Environment.
+** Click "Continue" if you want to proceed further.
+** If Environment is not correct then click on "Change Environment" button and resetup Environment.
 
 You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
 
