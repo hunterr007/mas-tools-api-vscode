@@ -1,6 +1,6 @@
 # MAS Tools API VS Code Extension
 
-This extension provides a convenient way to interact with the MAS Tools API directly from within Visual Studio Code. Typically users need to use Postman or other tools to set up API end point and keys. Certain features like fetching logs files are not very convenient in Postman. This extension solves all these problems.
+This extension provides a convenient way to interact with the [MAS Tools API](https://www.ibm.com/docs/en/masv-and-l/maximo-manage/8.3.0?topic=suite-apis-administrative-utilities) directly from within Visual Studio Code. Typically users need to use Postman or other tools to set up API end point and keys. Certain features like fetching logs files are not very convenient in Postman. This extension solves all these problems.
 
 ## Features
 
