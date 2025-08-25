@@ -20,7 +20,7 @@
         "onCommand:mas-tools-api.streamManageLogs"
     ],
     "main": "./dist/extension.js",
-    "icon": "images/Logo.png",
+    "icon": "images/Logo.jpg",
     "galleryBanner": {
         "color": "#007acc",
         "theme": "dark"

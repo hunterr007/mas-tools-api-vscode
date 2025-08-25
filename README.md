@@ -1,14 +1,16 @@
 # MAS Tools API VS Code Extension
 
-This extension provides a convenient way to interact with the MAS Tools API directly from within Visual Studio Code.
+This extension provides a convenient way to interact with the MAS Tools API directly from within Visual Studio Code. Typically users need to use Postman or other tools to set up API end point and keys. Certain features like fetching logs files are not very convenient in Postman. This extension solves all these problems.
 
 ## Features
 
-*   **Setup Command:**
-    1. One-time setup command to securely store your MAS End Point URL, MAXINST Pod's URL and API Key.
+This extension provides following features using MAS Tools API:
+
+*   **Setup:**
+    1. One-time setup command to securely store your MAS End Point URL, Maxinst Pod's URL and API Key.
     2. Ability to verify environment before running the command and change environment.
        
-*   **API Commands:** Access to all the MAS Tools API endpoints through the VS Code command palette -
+*   **API :** Access to all the MAS Tools API endpoints through the VS Code command palette -
 
     1. Start Manage
     2. Stop Manage
@@ -17,3 +19,72 @@ This extension provides a convenient way to interact with the MAS Tools API dire
     5. Get all tool logs and click to fetch individual log
     6. Generate Integirty Checker Log
     7. Read Integity Checker Log
+
+## How to Start Working
+
+### Setup
+
+*  Go to Visual Studio Marketplace and search for MAS Tools API and Install the Plugin -
+
+![alt text](image.png)
+
+*  Once installed, press:
+    ctrl+shift+p in Windows
+    cmd+shift+p in Mac
+
+*  Search MAS Tools API and You'll see following menu:
+
+![alt text](image-1.png)
+
+*  From Menu click on MAS Tools API Setup, provide MAXINST URL for your Maximo environment and hit Enter:
+
+![alt text](image-4.png)
+
+*  Provide Manage URL and hit Enter:
+
+![alt text](image-6.png)
+
+* Create API Key for your user in MAS Manage and provide API Key and hit Enter:
+
+![alt text](image-7.png)
+
+This will complete the setup and message in right hand corner you will see message for configuration is saved.
+
+### Start Manage
+
+* To Start Manage, choose Option - "MAS Tools API: Start Manage Pods" from Search bar.
+You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+
+### Stop Manage
+
+* To Stop Manage, choose Option - "MAS Tools API: Stop Manage Pods"  from Search bar.
+You'll see pop up in right hand corner success message and MAS Pods will stop in few mins.
+
+### Upload Manage log in S3
+
+* To Start Manage, choose Option - "MAS Tools API: Upload Logs to S3" from Search bar.
+You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+
+### Stream Manage Logs
+
+* To Start Manage, choose Option - "MAS Tools API: Stream MAS Manage Logs" from Search bar.
+You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+
+### Get all tool logs and click to fetch individual log
+
+* To Start Manage, choose Option - "MAS Tools API: Get All Tools Logs" from Search bar.
+You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+
+### Generate Integirty Checker Log
+
+* To generate Integrity Checker log, choose Option - "MAS Tools API: Generate Integrity Check Report" from Search bar.
+
+
+### Read Integity Checker Log
+
+* To 
+
+
+
+
+
