@@ -14,10 +14,8 @@
         "onCommand:mas-tools-api.generateIntegrityCheckerReport",
         "onCommand:mas-tools-api.getToolsLogs",
         "onCommand:mas-tools-api.submitUploadLogRequest",
-        "onCommand:mas-tools-api.runIntegrityCheckerRepair",
         "onCommand:mas-tools-api.stopManagePods",
         "onCommand:mas-tools-api.startManagePods",
-        "onCommand:mas-tools-api.installExternalCertificate",
         "onCommand:mas-tools-api.streamManageLogs"
     ],
     "main": "./dist/extension.js",
@@ -29,7 +27,7 @@
             },
             {
                 "command": "mas-tools-api.generateIntegrityCheckerReport",
-                "title": "MAS Tools API: Generate Integrity Checker Report"
+                "title": "MAS Tools API: Generate Integrity Check Report"
             },
             {
                 "command": "mas-tools-api.getToolsLogs",
@@ -40,20 +38,12 @@
                 "title": "MAS Tools API: Upload Logs to S3"
             },
             {
-                "command": "mas-tools-api.runIntegrityCheckerRepair",
-                "title": "MAS Tools API: Run Integrity Checker Repair"
-            },
-            {
                 "command": "mas-tools-api.stopManagePods",
                 "title": "MAS Tools API: Stop Manage Pods"
             },
             {
                 "command": "mas-tools-api.startManagePods",
                 "title": "MAS Tools API: Start Manage Pods"
-            },
-            {
-                "command": "mas-tools-api.installExternalCertificate",
-                "title": "MAS Tools API: Install External Certificate"
             },
             {
                 "command": "mas-tools-api.streamManageLogs",

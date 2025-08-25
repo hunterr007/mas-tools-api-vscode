@@ -134,11 +134,6 @@ Do you want to continue with this environment?`;
 
 // -------------------- API Functions --------------------
 
-export async function generateIntegrityCheckerReport(context: vscode.ExtensionContext) {
-    if (!(await checkEnvironmentSetup(context))) return;
-    return makeApiRequest(context, '/toolsapi/toolservice/icheckerreport', 'POST');
-}
-
 export async function getAllToolsLogs(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
 
@@ -292,12 +287,6 @@ export async function uploadLogsToS3(context: vscode.ExtensionContext) {
     }
 }
 
-
-export async function runIntegrityCheckerRepair(context: vscode.ExtensionContext) {
-    if (!(await checkEnvironmentSetup(context))) return;
-    return makeApiRequest(context, '/toolsapi/toolservice/icheckerrepair', 'POST');
-}
-
 export async function stopManagePods(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
 
@@ -342,11 +331,6 @@ export async function startManagePods(context: vscode.ExtensionContext) {
 }
 
 
-export async function installExternalCertificate(context: vscode.ExtensionContext) {
-    if (!(await checkEnvironmentSetup(context))) return;
-    return makeApiRequest(context, '/toolsapi/toolservice/installexternalcert', 'POST');
-}
-
 export async function streamManageLogs(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
 
@@ -379,3 +363,86 @@ export async function streamManageLogs(context: vscode.ExtensionContext) {
         return false;
     }
 }
+
+export async function generateIntegrityCheckerReport(context: vscode.ExtensionContext) {
+    if (!(await checkEnvironmentSetup(context))) return;
+
+    try {
+        const response = await makeApiRequest(
+            context,
+            '/toolsapi/toolservice/icheckerreport',
+            'POST'
+        );
+
+        if (!response || typeof response !== 'object') {
+            vscode.window.showErrorMessage('Failed to generate Integrity Checker Report.');
+            return;
+        }
+
+        const { lisfile, logfile } = response;
+
+        const panel = vscode.window.createWebviewPanel(
+            'integrityCheckerReport',
+            'Integrity Checker Report',
+            vscode.ViewColumn.One,
+            { enableScripts: true }
+        );
+
+        // Build HTML: make both files clickable
+        let html = `<h2>🛡 Integrity Checker Report</h2>`;
+
+        if (lisfile) {
+            html += `
+              <div style="margin-bottom: 20px; font-family: monospace;">
+                <a href="#" onclick="vscode.postMessage({ command: 'open', file: '${lisfile}' })"
+                   style="font-weight: bold; text-decoration: none; color: #007acc;">
+                  ${lisfile}
+                </a>
+              </div>
+            `;
+        }
+
+        if (logfile) {
+            html += `
+              <div style="margin-bottom: 20px; font-family: monospace;">
+                <a href="#" onclick="vscode.postMessage({ command: 'open', file: '${logfile}' })"
+                   style="font-weight: bold; text-decoration: none; color: #007acc;">
+                  ${logfile}
+                </a>
+              </div>
+            `;
+        }
+
+        panel.webview.html = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body { font-family: sans-serif; padding: 10px; }
+              h2 { color: #333; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            ${html}
+            <script>
+              const vscode = acquireVsCodeApi();
+              window.addEventListener('message', event => {});
+            </script>
+          </body>
+          </html>
+        `;
+
+        // Listen for clicks from the webview
+        panel.webview.onDidReceiveMessage(async (msg) => {
+            if (msg.command === 'open') {
+                await openToolLog(context, msg.file);
+            }
+        });
+
+    } catch (error: any) {
+        vscode.window.showErrorMessage(`Failed to generate Integrity Checker Report: ${error.message || error}`);
+    }
+}
+
+
