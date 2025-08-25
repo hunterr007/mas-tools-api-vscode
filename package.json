@@ -17,7 +17,8 @@
         "onCommand:mas-tools-api.runIntegrityCheckerRepair",
         "onCommand:mas-tools-api.stopManagePods",
         "onCommand:mas-tools-api.startManagePods",
-        "onCommand:mas-tools-api.installExternalCertificate"
+        "onCommand:mas-tools-api.installExternalCertificate",
+        "onCommand:mas-tools-api.streamManageLogs"
     ],
     "main": "./dist/extension.js",
     "contributes": {
@@ -53,6 +54,10 @@
             {
                 "command": "mas-tools-api.installExternalCertificate",
                 "title": "MAS Tools API: Install External Certificate"
+            },
+            {
+                "command": "mas-tools-api.streamManageLogs",
+                "title": "MAS Tools API: Stream MAS Manage Logs"
             }
         ]
     },

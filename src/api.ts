@@ -293,8 +293,6 @@ export async function uploadLogsToS3(context: vscode.ExtensionContext) {
 }
 
 
-
-
 export async function runIntegrityCheckerRepair(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
     return makeApiRequest(context, '/toolsapi/toolservice/icheckerrepair', 'POST');
@@ -347,4 +345,37 @@ export async function startManagePods(context: vscode.ExtensionContext) {
 export async function installExternalCertificate(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
     return makeApiRequest(context, '/toolsapi/toolservice/installexternalcert', 'POST');
+}
+
+export async function streamManageLogs(context: vscode.ExtensionContext) {
+    if (!(await checkEnvironmentSetup(context))) return;
+
+    try {
+        const response = await makeApiRequest(
+            context,
+            '/maximo/api/service/logging',
+            'GET',
+            undefined,
+            { action: 'wsmethod:streamLog' }
+        );
+
+        if (response) {
+            // Create and show document with logs
+            const logDoc = await vscode.workspace.openTextDocument({
+                content: typeof response === 'string' ? response : JSON.stringify(response, null, 2),
+                language: 'log'
+            });
+            await vscode.window.showTextDocument(logDoc, {
+                preview: false,
+                viewColumn: vscode.ViewColumn.Two
+            });
+            
+            vscode.window.showInformationMessage('MAS Manage logs retrieved successfully.');
+            return true;
+        }
+        return false;
+    } catch (error: any) {
+        vscode.window.showErrorMessage(`Failed to stream MAS Manage logs: ${error.message}`);
+        return false;
+    }
 }

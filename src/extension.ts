@@ -9,7 +9,8 @@ import {
     runIntegrityCheckerRepair,
     stopManagePods,
     startManagePods,
-    installExternalCertificate
+    installExternalCertificate,
+    streamManageLogs
 } from './api';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -70,7 +71,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('mas-tools-api.runIntegrityCheckerRepair', () => runIntegrityCheckerRepair(context)),
         vscode.commands.registerCommand('mas-tools-api.stopManagePods', () => stopManagePods(context)),
         vscode.commands.registerCommand('mas-tools-api.startManagePods', () => startManagePods(context)),
-        vscode.commands.registerCommand('mas-tools-api.installExternalCertificate', () => installExternalCertificate(context))
+        vscode.commands.registerCommand('mas-tools-api.installExternalCertificate', () => installExternalCertificate(context)),
+        vscode.commands.registerCommand('mas-tools-api.streamManageLogs', () => streamManageLogs(context))
     ];
 
     context.subscriptions.push(setupCommand, ...commands);
