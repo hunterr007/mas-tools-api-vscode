@@ -24,9 +24,9 @@ async function getMasCredentials(context: vscode.ExtensionContext): Promise<MasC
     return { maxinstUrl, manageUrl, apiKey };
 }
 
-async function makeApiRequest(
+export async function makeApiRequest(
     context: vscode.ExtensionContext,
-    endpoint: string,   // always pass a full path starting with /toolsapi/... or /maximo/...
+    endpoint: string,
     method: 'GET' | 'POST',
     data?: any,
     params?: Record<string, any>
@@ -36,10 +36,8 @@ async function makeApiRequest(
 
     let baseUrl: string;
     if (endpoint.startsWith('/toolsapi/')) {
-        // tools API calls go against maxinst
         baseUrl = credentials.maxinstUrl;
     } else if (endpoint.startsWith('/maximo/')) {
-        // manage maximo endpoints
         baseUrl = credentials.manageUrl;
     } else {
         vscode.window.showErrorMessage(`Invalid endpoint: ${endpoint}. Must start with /toolsapi/ or /maximo/`);
@@ -210,7 +208,7 @@ export async function getAllToolsLogs(context: vscode.ExtensionContext) {
 
 // 🔹 Command: Open specific log (used by clickable links)
 export async function openToolLog(context: vscode.ExtensionContext, fileName?: string) {
-    if (!(await checkEnvironmentSetup(context))) return;
+    //if (!(await checkEnvironmentSetup(context))) return;
 
     // If invoked from command palette, ask user
     if (!fileName) {
@@ -249,41 +247,52 @@ export async function uploadLogsToS3(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
 
     try {
+        // Pass action as a query param, not JSON body
         const response = await makeApiRequest(
             context,
             '/maximo/api/service/logging',
             'POST',
-            undefined,
+            undefined, // no body
             { action: 'wsmethod:submitUploadLogRequest' }
         );
 
-        let logFileName: string;
+        let logFileCode: string | undefined;
 
-        if (response && response.return) {
-            // ✅ API returned the file code
-            logFileName = response.return;
-        } else {
-            // ❌ Unexpected response → fallback log name
-            logFileName = `upload_${new Date().toISOString().replace(/[:.]/g, "-")}.log`;
-
-            // open the unexpected response in an editor
-            const content = typeof response === "string" ? response : JSON.stringify(response, null, 2);
-            const doc = await vscode.workspace.openTextDocument({
-                content,
-                language: 'json'
-            });
-            await vscode.window.showTextDocument(doc);
+        // Common success shape: { "return": "<code>" }
+        if (response && typeof response === 'object' && 'return' in response) {
+            logFileCode = (response as any).return;
+        } else if (typeof response === 'string') {
+            try {
+                const parsed = JSON.parse(response);
+                if (parsed && parsed.return) logFileCode = parsed.return;
+            } catch {
+                // not JSON, just ignore
+            }
         }
 
-        // Show success notification with the log file code/name
-        vscode.window.showInformationMessage(`Upload complete. Log file code: ${logFileName}`);
-        return logFileName;
+        if (logFileCode) {
+            vscode.window.showInformationMessage(`Upload complete. Log file code: ${logFileCode}`);
+            return logFileCode;
+        }
+
+        // Unexpected response: show it in editor
+        const fallbackName = `upload_${new Date().toISOString().replace(/[:.]/g, "-")}.log`;
+        const content = typeof response === 'string' ? response : JSON.stringify(response, null, 2);
+        const doc = await vscode.workspace.openTextDocument({ content, language: 'json' });
+        await vscode.window.showTextDocument(doc);
+
+        vscode.window.showWarningMessage(
+            `Upload completed but response was unexpected. Saved fallback name: ${fallbackName}`
+        );
+        return fallbackName;
 
     } catch (error: any) {
         vscode.window.showErrorMessage(`Upload failed: ${error.message || error}`);
         throw error;
     }
 }
+
+
 
 
 export async function runIntegrityCheckerRepair(context: vscode.ExtensionContext) {
@@ -293,13 +302,47 @@ export async function runIntegrityCheckerRepair(context: vscode.ExtensionContext
 
 export async function stopManagePods(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
-    return makeApiRequest(context, '/toolsapi/toolservice/managestop', 'POST');
+
+    try {
+        const response = await makeApiRequest(
+            context,
+            '/toolsapi/toolservice/managestop',
+            'POST'
+        );
+
+        // If response is undefined, makeApiRequest already showed an error
+        if (response !== undefined) {
+            vscode.window.showInformationMessage("✅ MAS Manage stop request submitted successfully.");
+            return true;
+        }
+        return false;
+    } catch (error: any) {
+        vscode.window.showErrorMessage(`❌ Failed to stop MAS Manage: ${error.message}`);
+        return false;
+    }
 }
 
 export async function startManagePods(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
-    return makeApiRequest(context, '/toolsapi/toolservice/managestart', 'POST');
+
+    try {
+        const response = await makeApiRequest(
+            context,
+            '/toolsapi/toolservice/managestart',
+            'POST'
+        );
+
+        if (response !== undefined) {
+            vscode.window.showInformationMessage("✅ MAS Manage start request submitted successfully.");
+            return true;
+        }
+        return false;
+    } catch (error: any) {
+        vscode.window.showErrorMessage(`❌ Failed to start MAS Manage: ${error.message}`);
+        return false;
+    }
 }
+
 
 export async function installExternalCertificate(context: vscode.ExtensionContext) {
     if (!(await checkEnvironmentSetup(context))) return;
