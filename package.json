@@ -1,8 +1,9 @@
 {
     "name": "mas-tools-api",
     "displayName": "MAS Tools API",
-    "description": "Visual Studio Code extension for MAS Tools API by Reliability Odyssey",
+    "description": "Visual Studio Code extension for MAS Tools API by Prashant Sharma (Reliability Odyssey, https://www.youtube.com/@reliabilityodyssey)",
     "version": "0.0.1",
+    "publisher": "reliabilityodyssey",
     "engines": {
         "vscode": "^1.85.0"
     },
@@ -19,6 +20,11 @@
         "onCommand:mas-tools-api.streamManageLogs"
     ],
     "main": "./dist/extension.js",
+    "icon": "images/Logo.png",
+    "galleryBanner": {
+        "color": "#007acc",
+        "theme": "dark"
+    },
     "contributes": {
         "commands": [
             {
