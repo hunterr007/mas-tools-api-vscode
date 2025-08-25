@@ -85,12 +85,15 @@ First environment confirmation dialog will open. If continue, you'll see pop up 
 ### Stream Manage Logs
 
 * To Start Manage, choose Option - "MAS Tools API: Stream MAS Manage Logs" from Search bar.
-You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+First environment confirmation dialog will open. If continue, you'll see new log file from Steam log.
+Run Stream Manage Logs again and it will show updated logs.
+
+![alt text](images/image-stream.png)
 
 ### Get all tool logs and click to fetch individual log
 
 * To Start Manage, choose Option - "MAS Tools API: Get All Tools Logs" from Search bar.
-You'll see list of all logs available in new file.
+First environment confirmation dialog will open. If continue, you'll see list of all logs available in new file.
 
 ![alt text](images/image-alltools.png)
 
@@ -101,6 +104,7 @@ Click on File Name and it will fetch the log file and open as shown below:
 ### Generate Integirty Checker Log
 
 * To generate Integrity Checker log, choose Option - "MAS Tools API: Generate Integrity Check Report" from Search bar.
+First environment confirmation dialog will open. If continue, you'll list of IC log generated.
 
 ![alt text](images/image-genic.png)
 
