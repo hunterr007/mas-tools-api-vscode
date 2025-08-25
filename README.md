@@ -60,8 +60,8 @@ You'll see a poup with MAXINST and Manage URL to confirm you are going to run co
 
 ![alt text](images/image-change.png)
 
-** Click "Continue" if you want to proceed further.
-** If Environment is not correct then click on "Change Environment" button and resetup Environment.
+Click "Continue" if you want to proceed further.
+If Environment is not correct then click on "Change Environment" button and resetup Environment.
 
 You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
 
@@ -70,14 +70,17 @@ You'll see pop up in right hand corner success message and MAS Pods will start i
 ### Stop Manage
 
 * To Stop Manage, choose Option - "MAS Tools API: Stop Manage Pods"  from Search bar.
-You'll see pop up in right hand corner success message and MAS Pods will stop in few mins.
+First environment confirmation dialog will open. If continue, you'll see pop up in right hand corner success message and MAS Pods will stop in few mins.
 
 ![alt text](images/image-stopmanage.png)
 
 ### Upload Manage log in S3
 
 * To Start Manage, choose Option - "MAS Tools API: Upload Logs to S3" from Search bar.
-You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+
+First environment confirmation dialog will open. If continue, you'll see pop up in right hand corner showing success message. File# uploaded for the API call will also be displyed.
+
+
 
 ### Stream Manage Logs
 
@@ -87,16 +90,26 @@ You'll see pop up in right hand corner success message and MAS Pods will start i
 ### Get all tool logs and click to fetch individual log
 
 * To Start Manage, choose Option - "MAS Tools API: Get All Tools Logs" from Search bar.
-You'll see pop up in right hand corner success message and MAS Pods will start in few mins.
+You'll see list of all logs available in new file.
+
+![alt text](images/image-alltools.png)
+
+Click on File Name and it will fetch the log file and open as shown below:
+
+![alt text](images/image-toolfile.png)
 
 ### Generate Integirty Checker Log
 
 * To generate Integrity Checker log, choose Option - "MAS Tools API: Generate Integrity Check Report" from Search bar.
 
+![alt text](images/image-genic.png)
+
 
 ### Read Integity Checker Log
 
-* To 
+* To read Interity Checker log,click on File Name and it will fetch the Integirty Checker Report file and open as shown below:
+
+![alt text](images/image-iclog.png)
 
 
 
