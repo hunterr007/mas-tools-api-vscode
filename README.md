@@ -26,7 +26,7 @@ This extension provides following features using MAS Tools API:
 
 *  Go to Visual Studio Marketplace and search for MAS Tools API and Install the Plugin -
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 *  Once installed, press:
     ctrl+shift+p in Windows
@@ -34,19 +34,19 @@ This extension provides following features using MAS Tools API:
 
 *  Search MAS Tools API and You'll see following menu:
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 *  From Menu click on MAS Tools API Setup, provide MAXINST URL for your Maximo environment and hit Enter:
 
-![alt text](image-4.png)
+![alt text](images/image-8.png)
 
 *  Provide Manage URL and hit Enter:
 
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 * Create API Key for your user in MAS Manage and provide API Key and hit Enter:
 
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 
 This will complete the setup and message in right hand corner you will see message for configuration is saved.
 
