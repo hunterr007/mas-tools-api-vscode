@@ -2,7 +2,7 @@
     "name": "mas-tools-api",
     "displayName": "MAS Tools API",
     "description": "Visual Studio Code extension for MAS Tools API by Prashant Sharma (Reliability Odyssey, https://www.youtube.com/@reliabilityodyssey)",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "reliabilityodyssey",
     "engines": {
         "vscode": "^1.85.0"
