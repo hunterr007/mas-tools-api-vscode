@@ -80,7 +80,7 @@ First environment confirmation dialog will open. If continue, you'll see pop up 
 
 First environment confirmation dialog will open. If continue, you'll see pop up in right hand corner showing success message. File# uploaded for the API call will also be displyed.
 
-
+![alt text](images/image-upload.png)
 
 ### Stream Manage Logs
 
