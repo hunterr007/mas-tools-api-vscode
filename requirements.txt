@@ -1,0 +1,4 @@
+# This is a Node.js project. Dependencies are managed in package.json.
+# This file is for reference only.
+
+axios
