@@ -20,7 +20,7 @@ This extension provides following features using MAS Tools API:
     6. Generate Integirty Checker Log
     7. Read Integity Checker Log
 
-## How to Start Working
+## Features
 
 ### Setup
 
@@ -36,7 +36,7 @@ This extension provides following features using MAS Tools API:
 
 ![alt text](images/image-1.png)
 
-*  From Menu click on MAS Tools API Setup, provide MAXINST URL for your Maximo environment and hit Enter:
+*  From Menu click on "MAS Tools API: Setup", provide MAXINST URL for your Maximo environment and hit Enter:
 
 ![alt text](images/image-8.png)
 
@@ -116,6 +116,9 @@ First environment confirmation dialog will open. If continue, you'll list of IC 
 ![alt text](images/image-iclog.png)
 
 
+## Troubeshooting
 
+* In case of any error, it will be shown in right hand side pop up on the screen.
+* Setup Environmen details again from option "MAS Tools API: Setup".
 
 
