@@ -25,6 +25,10 @@
         "color": "#007acc",
         "theme": "dark"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hunterr007/mas-tools-api-vscode.git"
+    },
     "contributes": {
         "commands": [
             {
